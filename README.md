@@ -24,3 +24,10 @@ kitchen login default-centos65
 
 kitchen destroy default-centos65
 	#Destroy a vm default-centos65
+
+chef-client --version
+	#Verifica a versao do chef-client
+
+curl -Lk https://www.getchef.com/chef/install.sh | sudo bash
+	#Se nao tiver instalado o comando acima faz o download e instala
+
