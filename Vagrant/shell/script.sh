@@ -1,4 +1,4 @@
-#!/bn/bash
+#!/bin/bash
 REPO="https://github.com/AnselmoPfeifer/financeiro-web-jsf.git"
 
 #Instalar java e Tomcat git maven zip
