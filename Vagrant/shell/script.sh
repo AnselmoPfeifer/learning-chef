@@ -4,14 +4,22 @@ REPO="https://github.com/AnselmoPfeifer/financeiro-web-jsf.git"
 #Instalar java e Tomcat git maven zip
 sudo apt-get update --force-yes
 sudo apt-get upgrade --force-yes
+
 sudo apt-get -y install apache2 git zip maven --force-yes
-sleep 5
+
+sudo service apache2 stop
 cd /etc/apache2/mods-available
 sudo a2enmod proxy_ajp
 sudo a2enmod proxy
-sudo rm cd /etc/apache2/sites-avaliable/*
-cp /vagrant/files/default.conf /etc/apache2/sites-avaliable/
-sudo service apache2 restart
+sudo rm /etc/apache2/sites-available/*
+sudo rm /etc/apache2/sites-enable/*
+sudo rm /var/www/*
+sudo cp /vagrant/files/index.html /var/www/ && chown -R www-data:www-data /var/www/
+cp /vagrant/files/*.conf /etc/apache2/sites-available/
+cd /etc/apache2/sites-available/ && sudo a2ensite default.conf
+sudo rm -rf /etc/apache2/apache2.conf && sudo cp /vagrant/files/apachee2.conf /etc/apache2/
+sudo service apache2 start
+
 
 #Instalar JAVA8
 cd /usr/local && sudo mkdir /usr/local/java
@@ -37,9 +45,8 @@ cd /usr/local/ && sudo unzip apache-tomcat-8.0.32.zip && sudo mv apache-tomcat-8
 sudo rm /usr/local/apache-tomcat-8.0.32.zip
 
 #Deploy
-sudo mkdir /var/www/manutencao && cp /vagrant/files/index.html /var/www/manutencao/ && sudo chown www-data:www-data -R /var/www/manutencao
-cd /etc/apache2/sites-avaliable/
-cp /vagrant/files/manutencao.conf /etc/apache2/sites-avaliable/
+sudo mkdir /var/www/manutencao && cp /vagrant/files/manutencao/index.html /var/www/manutencao/ && sudo chown www-data:www-data -R /var/www/manutencao
+cd /etc/apache2/sites-available/
 sudo a2ensite manutencao.conf
 sudo a2dissite default.conf
 sudo service apache2 reload
@@ -59,9 +66,7 @@ cat /vagrant/files/banco.sql | mysql -u root -pvENh0znCvPL93T9E financeiro
 #Star Tomcat
 sudo sh /usr/local/tomcat/bin/startup.sh
 sleep 10
-cd /etc/apache2/sites-avaliable/
-sudo a2dissite manutencao.conf
-sudo a2ensite default.conf
+cd /etc/apache2/sites-avaliable/ && sudo a2dissite manutencao.conf && sudo a2ensite default.conf && 
 sudo service apache2 reload
 
 echo "##########################################"
@@ -69,3 +74,6 @@ echo ""
 echo "	acesse http://localhost:8081"
 echo""
 echo "##########################################"
+exit
+exit
+
