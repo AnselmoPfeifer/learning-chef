@@ -1,0 +1,10 @@
+node['apache']['dir'] == '/etc/apache2'
+node['apache']['user'] == 'www-data'
+node['apache']['group'] == 'www-data'
+node['apache']['mode'] == '0755'
+node['apache']['docroot_dir'] == '/var/www/'
+node['apache']['listen'] == ["*:80"]
+node['apache']['conf_dir'] == 'apache2.conf'
+node['apache']['log_dir'] == '/var/log/apache2/'
+node['apache']['error_log'] == 'error.log'
+node['apache']['access_log'] == 'access.log'
