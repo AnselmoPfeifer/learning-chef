@@ -1,8 +1,4 @@
-#########################################
-#					#
-#	Comandos basicos 		#
-#					#
-#########################################
+# Comandos basicos
 
 kitchen init --create-gemfile
 - Cria a estrutura de arquivos do Chef
